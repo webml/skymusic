@@ -9,15 +9,13 @@
         </div>
         <div class="track__title-text">
           <a class="track__title-link" href="http://"
-            >{{ track.title }}
+            >{{ track.name }}
             <span class="track__title-span">{{ track.desc }}</span></a
           >
         </div>
       </div>
       <div class="track__author">
-        <a class="track__author-link" href="http://">{{
-          track.authors.join(", ")
-        }}</a>
+        <a class="track__author-link" href="http://">{{ track.author }}</a>
       </div>
       <div class="track__album">
         <a class="track__album-link" href="http://">{{ track.album }}</a>
@@ -26,7 +24,9 @@
         <svg class="track__time-svg">
           <use xlink:href="/assets/icons/sprite.svg#icon-like" />
         </svg>
-        <span class="track__time-text">{{ track.time }}</span>
+        <span class="track__time-text">{{
+          formatDuration(track.duration_in_seconds)
+        }}</span>
       </div>
     </div>
   </div>
@@ -36,21 +36,14 @@
 const { track } = defineProps({
   track: {
     type: {
-      id: Number,
-      title: String,
+      _id: Number,
+      name: String,
       album: String,
-      time: String,
+      duration_in_seconds: String,
       desc: String,
-      authors: [String],
+      author: [String],
     },
-    default: {
-      id: 0,
-      title: "",
-      album: "",
-      time: "",
-      desc: "",
-      authors: [""],
-    },
+    default: null,
   },
 });
 </script>

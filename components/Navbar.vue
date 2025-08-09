@@ -3,12 +3,12 @@
     <div class="nav__logo logo">
       <img class="logo__image" src="/assets/img/logo.png" />
     </div>
-    <div class="nav__burger burger">
+    <div class="nav__burger burger" @click="setOpened">
       <span class="burger__line"></span>
       <span class="burger__line"></span>
       <span class="burger__line"></span>
     </div>
-    <div class="nav__menu menu">
+    <div v-show="isOpened" class="nav__menu menu">
       <ul class="menu__list">
         <li class="menu__item">
           <a href="#" class="menu__link">Главное</a>
@@ -24,7 +24,13 @@
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+const isOpened = ref(false);
+
+const setOpened = () => {
+  isOpened.value = !isOpened.value;
+};
+</script>
 
 <style lang="scss" scoped>
 .main__nav {
@@ -53,6 +59,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .nav__menu {
