@@ -7,27 +7,27 @@
           <div class="player__controls">
             <div class="player__btn-prev">
               <svg class="player__btn-prev-svg">
-                <use xlink:href="/icons/sprite.svg#icon-prev"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-prev"></use>
               </svg>
             </div>
             <div class="player__btn-play _btn">
               <svg class="player__btn-play-svg">
-                <use xlink:href="/icons/sprite.svg#icon-play"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-play"></use>
               </svg>
             </div>
             <div class="player__btn-next">
               <svg class="player__btn-next-svg">
-                <use xlink:href="/icons/sprite.svg#icon-next"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-next"></use>
               </svg>
             </div>
             <div class="player__btn-repeat _btn-icon">
               <svg class="player__btn-repeat-svg">
-                <use xlink:href="/icons/sprite.svg#icon-repeat"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-repeat"></use>
               </svg>
             </div>
             <div class="player__btn-shuffle _btn-icon">
               <svg class="player__btn-shuffle-svg">
-                <use xlink:href="/icons/sprite.svg#icon-shuffle"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-shuffle"></use>
               </svg>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="track-play__contain">
               <div class="track-play__image">
                 <svg class="track-play__svg">
-                  <use xlink:href="/icons/sprite.svg#icon-note"></use>
+                  <use xlink:href="/assets/icons/sprite.svg#icon-note"></use>
                 </svg>
               </div>
               <div class="track-play__author">
@@ -50,12 +50,12 @@
             <div class="track-play__like-dis">
               <div class="track-play__like _btn-icon">
                 <svg class="track-play__like-svg">
-                  <use xlink:href="/icons/sprite.svg#icon-like"></use>
+                  <use xlink:href="/assets/icons/sprite.svg#icon-like"></use>
                 </svg>
               </div>
               <div class="track-play__dislike _btn-icon">
                 <svg class="track-play__dislike-svg">
-                  <use xlink:href="/icons/sprite.svg#icon-dislike"></use>
+                  <use xlink:href="/assets/icons/sprite.svg#icon-dislike"></use>
                 </svg>
               </div>
             </div>
@@ -65,11 +65,15 @@
           <div class="volume__content">
             <div class="volume__image">
               <svg class="volume__svg">
-                <use xlink:href="/icons/sprite.svg#icon-volume"></use>
+                <use xlink:href="/assets/icons/sprite.svg#icon-volume"></use>
               </svg>
             </div>
             <div class="volume__progress _btn">
-              <input class="volume__progress-line _btn" type="range" name="range" />
+              <input
+                class="volume__progress-line _btn"
+                type="range"
+                name="range"
+              />
             </div>
           </div>
         </div>

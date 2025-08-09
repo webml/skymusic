@@ -17,6 +17,6 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "vite-tsconfig-paths": "^5.1.4"
+    "sass-embedded": "^1.90.0"
   }
 }

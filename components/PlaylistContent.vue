@@ -6,7 +6,7 @@
       <div class="playlist-title__col col03">Альбом</div>
       <div class="playlist-title__col col04">
         <svg class="playlist-title__svg">
-          <use xlink:href="/icons/sprite.svg#icon-watch" />
+          <use xlink:href="/assets/icons/sprite.svg#icon-watch" />
         </svg>
       </div>
     </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { tracks } from "@/moks/tracks";
+import { tracks } from "../moks/tracks";
 </script>
 
 <style lang="scss" scoped>

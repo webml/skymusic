@@ -7,7 +7,7 @@
         <div class="main__centerblock centerblock">
           <div class="centerblock__search search">
             <svg class="search__svg">
-              <use xlink:href="/icons/sprite.svg#icon-search" />
+              <use xlink:href="/assets/icons/sprite.svg#icon-search" />
             </svg>
             <input
               class="search__text"

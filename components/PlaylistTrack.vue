@@ -4,7 +4,7 @@
       <div class="track__title">
         <div class="track__title-image">
           <svg class="track__title-svg">
-            <use xlink:href="/icons/sprite.svg#icon-note" />
+            <use xlink:href="/assets/icons/sprite.svg#icon-note" />
           </svg>
         </div>
         <div class="track__title-text">
@@ -15,14 +15,16 @@
         </div>
       </div>
       <div class="track__author">
-        <a class="track__author-link" href="http://">{{ track.authors }}</a>
+        <a class="track__author-link" href="http://">{{
+          track.authors.join(", ")
+        }}</a>
       </div>
       <div class="track__album">
         <a class="track__album-link" href="http://">{{ track.album }}</a>
       </div>
       <div class="track__time">
         <svg class="track__time-svg">
-          <use xlink:href="/icons/sprite.svg#icon-like" />
+          <use xlink:href="/assets/icons/sprite.svg#icon-like" />
         </svg>
         <span class="track__time-text">{{ track.time }}</span>
       </div>
