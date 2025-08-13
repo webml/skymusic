@@ -10,14 +10,24 @@
         </svg>
       </div>
     </div>
-    <div class="content__playlist playlist">
-      <PlaylistTrack v-for="track in tracks" :key="track.id" :track="track" />
+    <div v-if="loading" class="content__playlist playlist">
+      <div class="loading">Загрузка треков...</div>
+    </div>
+    <div v-else-if="error" class="content__playlist playlist">
+      <div class="error">Ошибка загрузки треков: {{ error }}</div>
+    </div>
+    <div v-else class="content__playlist playlist">
+      <PlaylistTrack v-for="track in tracks" :key="track._id" :track="track" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { tracks } from "../moks/tracks";
+const { tracks, loading, error } = defineProps({
+  tracks: { default: [], type: Array },
+  loading: { type: Boolean },
+  error: { type: Object, default: null },
+});
 </script>
 
 <style lang="scss" scoped>

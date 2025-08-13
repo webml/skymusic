@@ -3,7 +3,7 @@
   <div class="wrapper">
     <div class="container">
       <main class="main">
-        <Navbar />
+        <NavBar />
         <div class="main__centerblock centerblock">
           <div class="centerblock__search search">
             <svg class="search__svg">
@@ -17,8 +17,12 @@
             />
           </div>
           <h2 class="centerblock__h2">Треки</h2>
-          <FilterControls />
-          <PlaylistContent />
+          <FilterControls :tracks="tracks" @filter-selected="handleFilter" />
+          <PlaylistContent
+            :tracks="filteredTracks"
+            :loading="loading"
+            :error="error"
+          />
         </div>
         <SideBar />
       </main>
@@ -28,7 +32,34 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const {
+  data: response,
+  loading,
+  error,
+} = await useFetch(
+  "https://webdev-music-003b5b991590.herokuapp.com/catalog/track/all/"
+);
+
+const tracks = computed(() => response.value?.data || []);
+
+const filteredTracks = ref(tracks.value);
+
+const handleFilter = ({ authors, years, genres }) => {
+  filteredTracks.value = tracks.value.filter(
+    (el) =>
+      (authors.length > 0 ? authors.includes(el.author) : true) &&
+      (years.length > 0
+        ? years.includes(el.release_date?.split("-")[0])
+        : true) &&
+      (genres.length > 0
+        ? Array.isArray(el.genre)
+          ? el.genre.some((g) => genres.includes(g.toLowerCase().trim()))
+          : genres.includes(el.genre?.toLowerCase().trim())
+        : true)
+  );
+};
+</script>
 
 <style lang="scss" scoped>
 .wrapper {
