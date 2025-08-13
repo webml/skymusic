@@ -1,21 +1,35 @@
 <template>
   <div class="bar">
     <div class="bar__content">
-      <div class="bar__player-progress"></div>
+      <div class="bar__player-progress" @click="handleProgressClick">
+        <div
+          class="bar__player-progress-line"
+          :style="{ width: playerStore.progress + '%' }"
+        ></div>
+      </div>
       <div class="bar__player-block">
         <div class="bar__player player">
           <div class="player__controls">
-            <div class="player__btn-prev">
+            <div class="player__btn-prev" @click="playPrevTrack">
               <svg class="player__btn-prev-svg">
                 <use xlink:href="/assets/icons/sprite.svg#icon-prev"></use>
               </svg>
             </div>
-            <div class="player__btn-play _btn">
+            <div
+              v-if="!playerStore.isPlaying"
+              class="player__btn-play _btn"
+              @click="handlePlay"
+            >
               <svg class="player__btn-play-svg">
                 <use xlink:href="/assets/icons/sprite.svg#icon-play"></use>
               </svg>
             </div>
-            <div class="player__btn-next">
+            <div v-else class="player__btn-play _btn" @click="handlePause">
+              <svg class="player__btn-play-svg">
+                <use xlink:href="/assets/icons/sprite.svg#icon-pause"></use>
+              </svg>
+            </div>
+            <div class="player__btn-next" @click="playNextTrack">
               <svg class="player__btn-next-svg">
                 <use xlink:href="/assets/icons/sprite.svg#icon-next"></use>
               </svg>
@@ -40,10 +54,14 @@
                 </svg>
               </div>
               <div class="track-play__author">
-                <a class="track-play__author-link" href="http://">Ты та...</a>
+                <a class="track-play__author-link" href="http://">{{
+                  playerStore.currentTrack?.author || "Выберите трек"
+                }}</a>
               </div>
               <div class="track-play__album">
-                <a class="track-play__album-link" href="http://">Баста</a>
+                <a class="track-play__album-link" href="http://">{{
+                  playerStore.currentTrack?.album || ""
+                }}</a>
               </div>
             </div>
 
@@ -70,19 +88,76 @@
             </div>
             <div class="volume__progress _btn">
               <input
+                v-model="playerStore.volume"
                 class="volume__progress-line _btn"
                 type="range"
                 name="range"
+                min="0"
+                max="100"
+                @input="updateVolume"
               />
             </div>
           </div>
         </div>
       </div>
     </div>
+    <audio
+      ref="audioRef"
+      @timeupdate="handleTimeUpdate"
+      @ended="handleTrackEnd"
+    />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { usePlayerStore } from "~/stores/player";
+
+// Получаем store
+const playerStore = usePlayerStore();
+const audioRef = ref(null);
+
+const {
+  playTrack,
+  pauseTrack,
+  handleTimeUpdate,
+  seekTo,
+  updateVolume,
+  initPlayer,
+  playNextTrack,
+  playPrevTrack,
+} = useAudioPlayer();
+
+onMounted(() => {
+  initPlayer(audioRef.value);
+});
+
+// Обработчик клика по кнопке play
+const handlePlay = () => {
+  if (playerStore.currentTrack) {
+    playTrack(playerStore.currentTrack);
+  }
+};
+
+const handlePause = () => {
+  pauseTrack();
+};
+
+// Обработчик клика по прогресс-бару, чтобы перемотать трек
+const handleProgressClick = (event) => {
+  if (!playerStore.currentTrack) return;
+
+  const progressBar = event.currentTarget;
+  // узнаём, где конкретно мы кликнули
+  const clickPosition = event.offsetX;
+  // получаем общую ширину бара
+  const progressBarWidth = progressBar.offsetWidth;
+  // и узнаем процентное соотношение клика к общей ширине.
+  // если в середине - 50%, значит нам нужна половина трека
+  const percentage = (clickPosition / progressBarWidth) * 100;
+  // передаём это значение в хук, чтобы он обновил значение в хранилище
+  seekTo(percentage);
+};
+</script>
 
 <style lang="scss" scoped>
 .bar {
@@ -107,6 +182,12 @@
   width: 100%;
   height: 5px;
   background: #2e2e2e;
+  cursor: pointer;
+}
+
+.bar__player-progress-line {
+  height: 5px;
+  background: #2364e7;
 }
 
 .bar__player-block {

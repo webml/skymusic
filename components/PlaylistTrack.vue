@@ -1,7 +1,7 @@
 <template>
   <div class="playlist__item">
     <div class="playlist__track track">
-      <div class="track__title">
+      <div class="track__title" @click="setTrack">
         <div class="track__title-image">
           <svg class="track__title-svg">
             <use xlink:href="/assets/icons/sprite.svg#icon-note" />
@@ -46,6 +46,14 @@ const { track } = defineProps({
     default: null,
   },
 });
+
+const { setCurrentTrack } = usePlayerStore();
+const { playTrack } = useAudioPlayer();
+
+const setTrack = () => {
+  setCurrentTrack(track);
+  playTrack(track);
+};
 </script>
 
 <style lang="scss" scoped>
