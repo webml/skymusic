@@ -11,13 +11,15 @@
     <div v-show="isOpened" class="nav__menu menu">
       <ul class="menu__list">
         <li class="menu__item">
-          <a href="#" class="menu__link">Главное</a>
+          <RouterLink to="/" class="menu__link">Главное</RouterLink>
         </li>
         <li class="menu__item">
-          <a href="#" class="menu__link">Мой плейлист</a>
+          <RouterLink to="/favorites" class="menu__link"
+            >Мой плейлист</RouterLink
+          >
         </li>
         <li class="menu__item">
-          <a href="../signin.html" class="menu__link">Войти</a>
+          <RouterLink to="/sign-in" class="menu__link">Войти</RouterLink>
         </li>
       </ul>
     </div>
