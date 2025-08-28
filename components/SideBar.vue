@@ -11,31 +11,31 @@
     <div class="sidebar__block">
       <div class="sidebar__list">
         <div class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <RouterLink class="sidebar__link" to="/category/2">
             <img
               class="sidebar__img"
               src="/assets/img/playlist01.png"
               alt="day's playlist"
             />
-          </a>
+          </RouterLink>
         </div>
         <div class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <RouterLink class="sidebar__link" to="/category/3">
             <img
               class="sidebar__img"
               src="/assets/img/playlist02.png"
               alt="day's playlist"
             />
-          </a>
+          </RouterLink>
         </div>
         <div class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <RouterLink class="sidebar__link" to="/category/4">
             <img
               class="sidebar__img"
               src="/assets/img/playlist03.png"
               alt="day's playlist"
             />
-          </a>
+          </RouterLink>
         </div>
       </div>
     </div>

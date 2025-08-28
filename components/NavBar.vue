@@ -19,7 +19,7 @@
           >
         </li>
         <li class="menu__item">
-          <RouterLink to="/sign-in" class="menu__link">Войти</RouterLink>
+          <RouterLink to="/log-in" class="menu__link">Войти</RouterLink>
         </li>
       </ul>
     </div>

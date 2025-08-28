@@ -21,11 +21,18 @@ export const useUserStore = defineStore("user", {
           id: response.result?._id || response._id,
           email: response.result?.email || response.email,
           username: response.result?.username || response.username,
+          password: credentials.password,
         };
-
         this.user = userData;
+
+        const tokenResponse = await this.fetchApi("/user/token/", "POST", {
+          email: this.user.email,
+          password: credentials.password,
+        });
+        this.user.token = tokenResponse.access;
+
         this.isAuth = true;
-        this.saveToStorage(userData);
+        this.saveToStorage(this.user);
       } catch (error) {
         this.error = this.getErrorMessage(error);
         throw error;
@@ -66,7 +73,7 @@ export const useUserStore = defineStore("user", {
     },
 
     isValidUser(data) {
-      return !!data?.id && !!data?.email && !!data?.username;
+      return !!data?.id && !!data?.email && !!data?.username && !!data?.token;
     },
 
     getErrorMessage(error) {
@@ -77,12 +84,16 @@ export const useUserStore = defineStore("user", {
     },
 
     async fetchApi(url, method, body) {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      if (this.isAuth && this.user?.token) {
+        headers.Authorization = `Bearer ${this.user.token}`;
+      }
+
       const response = await fetch(`${API_URL}${url}`, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-          ...(this.isAuth && { Authorization: `Bearer ${this.user?.id}` }),
-        },
+        headers,
         body: JSON.stringify(body),
       });
 
@@ -90,6 +101,7 @@ export const useUserStore = defineStore("user", {
         const error = await response.json();
         throw new Error(error.message);
       }
+
       return response.json();
     },
   },

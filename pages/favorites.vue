@@ -9,13 +9,38 @@
 </template>
 
 <script setup>
+const router = useRouter();
+const userStore = useUserStore();
+
+onMounted(() => {
+  console.log("user", userStore);
+  if (
+    !userStore.isAuth ||
+    userStore.user === null ||
+    userStore.user.token === null
+  ) {
+    router.push("/log-in");
+    return;
+  }
+});
+
 const {
   data: response,
   loading,
   error,
-} = await useFetch(API_URL + "catalog/track/favorite/all/");
+} = await useFetch(API_URL + "/catalog/track/favorite/all/", {
+  headers: {
+    Authorization: `Bearer ${userStore.user?.token}`,
+  },
+});
 
-const playlistTitle = computed(() => response.value.data.name || "Tреки");
+watch(error.value?.statusCode, (statusCode) => {
+  if (statusCode === 401) {
+    navigateTo("/log-in");
+  }
+});
+
+const playlistTitle = computed(() => response.value?.data?.name || "Tреки");
 
 const store = useTracksStore();
 const { tracks, isLoading, error: tracksError } = storeToRefs(store);
@@ -23,9 +48,12 @@ const handleFilter = ({ authors, years, genres }) => {
   store.setFilters({ authors, years, genres });
 };
 
-const filteredTracks = tracks.value.filter((el) =>
-  response.value.data.items.includes(el._id)
-);
+const filteredTracks = computed(() => {
+  if (!response.value?.data?.items || !tracks.value) return [];
+  return tracks.value.filter((el) =>
+    response.value.data.items.includes(el._id)
+  );
+});
 
 watch(
   playlistTitle,

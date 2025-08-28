@@ -60,7 +60,7 @@ const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 
-const isSignUp = computed(() => route.path.includes("signup"));
+const isSignIn = computed(() => route.path.includes("sign-in"));
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
@@ -79,7 +79,7 @@ const handleSubmit = async () => {
       return;
     }
 
-    if (isSignUp.value) {
+    if (isSignIn.value) {
       if (password.value !== confirmPassword.value) {
         userStore.error = "Пароли не совпадают";
         return;
@@ -120,13 +120,15 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .wrapper {
-  background-color: #000;
-  min-height: 100dvh;
-  min-width: 100dvw;
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999;
 }
 

@@ -2,17 +2,12 @@
   <div class="error-page">
     <h1>Ошибка {{ error.statusCode }}</h1>
     <p class="error-message">{{ error.message }}</p>
-    <NuxtLink to="/signin" class="back-link">Назад</NuxtLink>
+    <NuxtLink to="/log-in" class="back-link">Назад</NuxtLink>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  error: {
-    type: Object,
-    required: true,
-  },
-});
+const error = useError();
 </script>
 
 <style>
