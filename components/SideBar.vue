@@ -12,27 +12,30 @@
       <div class="sidebar__list">
         <div class="sidebar__item">
           <RouterLink class="sidebar__link" to="/category/2">
-            <img
+            <NuxtImg
+              :placeholder="[5]"
               class="sidebar__img"
-              src="/assets/img/playlist01.png"
+              src="/img/playlist01.png"
               alt="day's playlist"
             />
           </RouterLink>
         </div>
         <div class="sidebar__item">
           <RouterLink class="sidebar__link" to="/category/3">
-            <img
+            <NuxtImg
+              :placeholder="[5]"
               class="sidebar__img"
-              src="/assets/img/playlist02.png"
+              src="/img/playlist02.png"
               alt="day's playlist"
             />
           </RouterLink>
         </div>
         <div class="sidebar__item">
           <RouterLink class="sidebar__link" to="/category/4">
-            <img
+            <NuxtImg
+              :placeholder="[5]"
               class="sidebar__img"
-              src="/assets/img/playlist03.png"
+              src="/img/playlist03.png"
               alt="day's playlist"
             />
           </RouterLink>

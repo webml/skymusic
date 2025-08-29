@@ -7,7 +7,11 @@
             <form class="modal__form-login" @submit.prevent="handleSubmit">
               <NuxtLink to="/">
                 <div class="modal__logo">
-                  <img src="assets/img/logo_modal.png" alt="logo" />
+                  <NuxtImg
+                    :placeholder="[5]"
+                    src="assets/img/logo_modal.png"
+                    alt="logo"
+                  />
                 </div>
               </NuxtLink>
 

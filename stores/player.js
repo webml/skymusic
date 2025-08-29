@@ -14,6 +14,9 @@ export const usePlayerStore = defineStore("player", {
     volume: 50,
     // Ссылка на аудиотег
     audioRef: null,
+    isShuffle: false,
+    isRepeat: false,
+    originPlaylist: [],
   }),
 
   actions: {
@@ -24,7 +27,11 @@ export const usePlayerStore = defineStore("player", {
 
     // Установить плейлист
     setPlaylist(tracks) {
-      this.playlist = tracks;
+      this.isShuffle = !this.isShuffle;
+
+      this.shufflePlaylist();
+
+      this.originPlaylist = tracks;
     },
 
     // Установить прогресс
@@ -48,6 +55,36 @@ export const usePlayerStore = defineStore("player", {
       if (this.audioRef) {
         this.audioRef.volume = this.volume / 100;
       }
+    },
+
+    shufflePlaylist() {
+      this.isShuffle = !this.isShuffle;
+
+      if (this.isShuffle) {
+        const copyPlaylist = [...this.originPlaylist];
+        let currentIndex = copyPlaylist.length,
+          randomIndex;
+
+        while (currentIndex !== 0) {
+          // Выбираем случайный элемент
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+
+          // Меняем его с текущим элементом
+          [copyPlaylist[currentIndex], copyPlaylist[randomIndex]] = [
+            copyPlaylist[randomIndex],
+            copyPlaylist[currentIndex],
+          ];
+        }
+
+        this.playlist = copyPlaylist;
+      } else {
+        this.playlist = this.originPlaylist;
+      }
+    },
+
+    repeat() {
+      this.isRepeat = !this.isRepeat;
     },
   },
 });

@@ -1,7 +1,7 @@
 <template>
   <nav class="main__nav nav">
     <div class="nav__logo logo">
-      <img class="logo__image" src="/assets/img/logo.png" />
+      <NuxtImg :placeholder="[5]" class="logo__image" src="/img/logo.png" />
     </div>
     <div class="nav__burger burger" @click="setOpened">
       <span class="burger__line"></span>
