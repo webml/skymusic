@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 const isOpened = ref(false);
 
 const setOpened = () => {

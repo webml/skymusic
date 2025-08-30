@@ -1,4 +1,8 @@
 export const formatDuration = (seconds) => {
+  if (typeof seconds != "number" || isNaN(seconds) || seconds < 0) {
+    return "";
+  }
+
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
