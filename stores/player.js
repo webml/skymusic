@@ -28,10 +28,8 @@ export const usePlayerStore = defineStore("player", {
     // Установить плейлист
     setPlaylist(tracks) {
       this.isShuffle = !this.isShuffle;
-
-      this.shufflePlaylist();
-
       this.originPlaylist = tracks;
+      this.shufflePlaylist();
     },
 
     // Установить прогресс
