@@ -2,7 +2,7 @@
   <div class="main__sidebar sidebar">
     <div class="sidebar__personal">
       <p class="sidebar__personal-name">Sergey.Ivanov</p>
-      <div class="sidebar__icon">
+      <div class="sidebar__icon" @click="userStore.clearUser">
         <svg>
           <use xlink:href="/assets/icons/sprite.svg#logout"></use>
         </svg>
@@ -45,7 +45,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const userStore = useUserStore();
+</script>
 
 <style lang="scss" scoped>
 .main__sidebar {
