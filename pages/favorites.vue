@@ -13,7 +13,6 @@ const router = useRouter();
 const userStore = useUserStore();
 
 onMounted(() => {
-  console.log("user", userStore);
   if (
     !userStore.isAuth ||
     userStore.user === null ||

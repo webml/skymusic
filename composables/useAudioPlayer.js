@@ -22,7 +22,7 @@ export function useAudioPlayer() {
     }
 
     try {
-      const isSameTrack = playerStore.currentTrack?.id === track.id;
+      const isSameTrack = playerStore.currentTrack?._id === track._id;
 
       // Если трек другой — загружаем новый
       if (!isSameTrack || audio.src !== track.track_file) {
@@ -49,7 +49,7 @@ export function useAudioPlayer() {
 
     if (!playlist || !playlist.length || !currentTrack) return;
 
-    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id);
+    const currentIndex = playlist.findIndex((t) => t._id === currentTrack._id);
     const nextIndex = currentIndex + 1;
 
     if (nextIndex < playlist.length) {
@@ -63,7 +63,7 @@ export function useAudioPlayer() {
 
     if (!playlist || !playlist.length || !currentTrack) return;
 
-    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id);
+    const currentIndex = playlist.findIndex((t) => t._id === currentTrack._id);
     const prevIndex = currentIndex - 1;
 
     if (prevIndex >= 0) {
@@ -79,6 +79,11 @@ export function useAudioPlayer() {
     if (duration) {
       const progress = (currentTime / duration) * 100;
       playerStore.setProgress(progress);
+      if (progress === 100) {
+        playerStore.isRepeat
+          ? playTrack(playerStore.currentTrack)
+          : playNextTrack();
+      }
     }
   };
   // Перематываем

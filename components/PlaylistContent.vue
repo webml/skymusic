@@ -17,7 +17,12 @@
       <div class="error">Ошибка загрузки треков: {{ error }}</div>
     </div>
     <div v-else class="content__playlist playlist">
-      <PlaylistTrack v-for="track in tracks" :key="track._id" :track="track" />
+      <PlaylistTrack
+        v-for="track in tracks"
+        :key="track._id"
+        :track="track"
+        :tracks="tracks"
+      />
     </div>
   </div>
 </template>

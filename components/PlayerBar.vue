@@ -34,13 +34,29 @@
                 <use xlink:href="/assets/icons/sprite.svg#icon-next"></use>
               </svg>
             </div>
-            <div class="player__btn-repeat _btn-icon">
-              <svg class="player__btn-repeat-svg">
+            <div
+              class="player__btn-repeat _btn-icon"
+              @click="playerStore.repeat"
+            >
+              <svg
+                class="player__btn-repeat-svg"
+                :style="{
+                  stroke: playerStore.isRepeat ? 'white' : 'transparent',
+                }"
+              >
                 <use xlink:href="/assets/icons/sprite.svg#icon-repeat"></use>
               </svg>
             </div>
-            <div class="player__btn-shuffle _btn-icon">
-              <svg class="player__btn-shuffle-svg">
+            <div
+              class="player__btn-shuffle _btn-icon"
+              @click="playerStore.shufflePlaylist"
+            >
+              <svg
+                class="player__btn-shuffle-svg"
+                :style="{
+                  stroke: playerStore.isShuffle ? 'white' : 'transparent',
+                }"
+              >
                 <use xlink:href="/assets/icons/sprite.svg#icon-shuffle"></use>
               </svg>
             </div>

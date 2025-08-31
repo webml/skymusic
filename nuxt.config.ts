@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@pinia/nuxt"],
+  modules: ["@nuxt/eslint", "@pinia/nuxt", "@nuxt/image"],
   css: ["@/assets/styles/main.css", "@/assets/styles/reset.css"],
   vite: {
     resolve: {

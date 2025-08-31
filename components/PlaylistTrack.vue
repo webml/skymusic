@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const { track } = defineProps({
+const { track, tracks } = defineProps({
   track: {
     type: {
       _id: Number,
@@ -45,14 +45,15 @@ const { track } = defineProps({
     },
     default: null,
   },
+  tracks: Array,
 });
 
-const { setCurrentTrack } = usePlayerStore();
+const { setPlaylist } = usePlayerStore();
 const { playTrack } = useAudioPlayer();
 
 const setTrack = () => {
-  setCurrentTrack(track);
   playTrack(track);
+  setPlaylist(tracks);
 };
 </script>
 
