@@ -1,13 +1,15 @@
 <template>
   <div class="main__sidebar sidebar">
-    <div class="sidebar__personal">
-      <p class="sidebar__personal-name">Sergey.Ivanov</p>
-      <div class="sidebar__icon" @click="userStore.clearUser">
-        <svg>
-          <use xlink:href="/assets/icons/sprite.svg#logout"></use>
-        </svg>
+    <ClientOnly>
+      <div v-if="user !== null" class="sidebar__personal">
+        <p class="sidebar__personal-name">{{ user.username }}</p>
+        <div class="sidebar__icon" @click="userStore.clearUser">
+          <svg>
+            <use xlink:href="/assets/icons/sprite.svg#logout"></use>
+          </svg>
+        </div>
       </div>
-    </div>
+    </ClientOnly>
     <div class="sidebar__block">
       <div class="sidebar__list">
         <div class="sidebar__item">
@@ -47,6 +49,7 @@
 
 <script setup>
 const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 </script>
 
 <style lang="scss" scoped>

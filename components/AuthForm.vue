@@ -9,7 +9,7 @@
                 <div class="modal__logo">
                   <NuxtImg
                     :placeholder="[5]"
-                    src="assets/img/logo_modal.png"
+                    src="img/logo_modal.png"
                     alt="logo"
                   />
                 </div>

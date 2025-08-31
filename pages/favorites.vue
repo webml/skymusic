@@ -39,7 +39,7 @@ watch(error.value?.statusCode, (statusCode) => {
   }
 });
 
-const playlistTitle = computed(() => response.value?.data?.name || "Tреки");
+const playlistTitle = computed(() => response.value?.data?.name || "Избранное");
 
 const store = useTracksStore();
 const { tracks, isLoading, error: tracksError } = storeToRefs(store);
