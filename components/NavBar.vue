@@ -18,16 +18,27 @@
             >Мой плейлист</RouterLink
           >
         </li>
-        <li class="menu__item">
-          <RouterLink to="/log-in" class="menu__link">Войти</RouterLink>
-        </li>
+        <client-only>
+          <li class="menu__item" v-if="!user">
+            <RouterLink to="/log-in" class="menu__link">Войти</RouterLink>
+          </li>
+          <li v-else class="menu__item" @click="userStore.clearUser">
+            <a class="menu__link">Выйти</a>
+          </li>
+        </client-only>
       </ul>
     </div>
   </nav>
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../stores/user";
+
 const isOpened = ref(false);
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 
 const setOpened = () => {
   isOpened.value = !isOpened.value;

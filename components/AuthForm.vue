@@ -9,7 +9,7 @@
                 <div class="modal__logo">
                   <NuxtImg
                     :placeholder="[5]"
-                    src="assets/img/logo_modal.png"
+                    src="img/logo_modal.png"
                     alt="logo"
                   />
                 </div>
@@ -59,6 +59,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
 
 const route = useRoute();
 const router = useRouter();

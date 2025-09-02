@@ -16,17 +16,19 @@
 
 <script setup>
 useHead({
-  title: "Избранное | Skypro.Music",
+  title: "Треки | Skypro.Music",
   meta: [
     { name: "description", content: "Ваши любимые треки в одном месте" },
-    { property: "og\:title", content: "Избранное | Skypro Music" },
+    { property: "og\:title", content: "Треки | Skypro Music" },
     { property: "og\:site\_name", content: "Skypro Music" },
-    { name: "twitter\:title", content: "Skypro Music — Избранное" },
+    { name: "twitter\:title", content: "Skypro Music — Треки" },
   ],
 });
 
 const { fetchTracks } = useTracksQuery();
+const { restoreUser } = useUserStore();
 
+await restoreUser();
 await fetchTracks();
 </script>
 
