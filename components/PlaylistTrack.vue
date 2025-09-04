@@ -1,9 +1,14 @@
 <template>
-  <div class="playlist__item">
+  <div class="playlist__item" :class="{ 'playlist__item--active': isActive }">
     <div class="playlist__track track">
       <div class="track__title" @click="setTrack">
         <div class="track__title-image">
-          <svg class="track__title-svg">
+          <svg
+            class="track__title-svg"
+            :class="{
+              'track__title-svg--playing': isActive && isPlaying,
+            }"
+          >
             <use xlink:href="/assets/icons/sprite.svg#icon-note" />
           </svg>
         </div>
@@ -48,13 +53,21 @@ const { track, tracks } = defineProps({
   tracks: Array,
 });
 
-const { setPlaylist } = usePlayerStore();
+const player = usePlayerStore();
+const { currentTrack, isPlaying } = storeToRefs(player);
+const { setPlaylist } = player;
+
 const { playTrack } = useAudioPlayer();
 
 const setTrack = () => {
   playTrack(track);
   setPlaylist(tracks);
 };
+
+const isActive = computed(() => {
+  const currId = currentTrack.value?._id;
+  return currId != null && String(currId) === String(track._id);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +75,11 @@ const setTrack = () => {
   width: 100%;
   display: block;
   margin-bottom: 12px;
+}
+
+.playlist__item--active {
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
 }
 
 .playlist__track {
@@ -116,6 +134,25 @@ const setTrack = () => {
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    stroke: #4e4e4e;
+  }
+  50% {
+    transform: scale(1.2);
+    stroke: #ffffff;
+  }
+  100% {
+    transform: scale(1);
+    stroke: #4e4e4e;
+  }
+}
+
+.track__title-svg--playing {
+  animation: pulse 1s infinite;
 }
 
 .track__title-link {
