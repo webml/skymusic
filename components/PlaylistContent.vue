@@ -10,11 +10,17 @@
         </svg>
       </div>
     </div>
+
     <div v-if="loading" class="content__playlist playlist">
-      <div class="loading">Загрузка треков...</div>
+      <div class="loading">
+        <PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading /><PlaylistTrackLoading />
+      </div>
     </div>
     <div v-else-if="error" class="content__playlist playlist">
       <div class="error">Ошибка загрузки треков: {{ error }}</div>
+    </div>
+    <div v-else-if="tracks.length === 0" class="content__playlist playlist">
+      <div class="error">Нет треков :(</div>
     </div>
     <div v-else class="content__playlist playlist">
       <PlaylistTrack

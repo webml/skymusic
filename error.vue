@@ -2,7 +2,7 @@
   <div class="error-page">
     <h1>Ошибка {{ error.statusCode }}</h1>
     <p class="error-message">{{ error.message }}</p>
-    <NuxtLink to="/log-in" class="back-link">Назад</NuxtLink>
+    <NuxtLink to="/log-in" class="back-link">Выйти и зайти нормально</NuxtLink>
   </div>
 </template>
 
